@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		06698987218FC750005F7176 /* annotationpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06698986218FC750005F7176 /* annotationpin.swift */; };
 		0676C7D22190A41A0081519D /* photoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676C7D12190A41A0081519D /* photoCell.swift */; };
+		068B1A7A21929EB400BD917A /* PopVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B1A7921929EB400BD917A /* PopVc.swift */; };
 		06AE1F27218F3048005D5421 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AE1F26218F3048005D5421 /* AppDelegate.swift */; };
 		06AE1F29218F3048005D5421 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AE1F28218F3048005D5421 /* ViewController.swift */; };
 		06AE1F2C218F3048005D5421 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06AE1F2A218F3048005D5421 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		06698986218FC750005F7176 /* annotationpin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = annotationpin.swift; sourceTree = "<group>"; };
 		0676C7D12190A41A0081519D /* photoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCell.swift; sourceTree = "<group>"; };
+		068B1A7921929EB400BD917A /* PopVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopVc.swift; sourceTree = "<group>"; };
 		06AE1F23218F3048005D5421 /* PixelCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixelCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06AE1F26218F3048005D5421 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06AE1F28218F3048005D5421 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,9 +51,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		068B1A762192998E00BD917A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0676C7D12190A41A0081519D /* photoCell.swift */,
+				06698986218FC750005F7176 /* annotationpin.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		068B1A77219299A200BD917A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				06AE1F28218F3048005D5421 /* ViewController.swift */,
+				068B1A7921929EB400BD917A /* PopVc.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		06AE1F1A218F3048005D5421 = {
 			isa = PBXGroup;
 			children = (
+				06AE1F26218F3048005D5421 /* AppDelegate.swift */,
+				06AE1F2A218F3048005D5421 /* Main.storyboard */,
+				06AE1F2D218F304B005D5421 /* Assets.xcassets */,
+				06AE1F2F218F304B005D5421 /* LaunchScreen.storyboard */,
+				06AE1F32218F304B005D5421 /* Info.plist */,
 				06AE1F25218F3048005D5421 /* PixelCity */,
 				06AE1F24218F3048005D5421 /* Products */,
 				E035F210877EB141892A9E87 /* Pods */,
@@ -71,14 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				06B4C95E2190BCFD001C1C21 /* utilities */,
-				06AE1F26218F3048005D5421 /* AppDelegate.swift */,
-				06AE1F28218F3048005D5421 /* ViewController.swift */,
-				06AE1F2A218F3048005D5421 /* Main.storyboard */,
-				06AE1F2D218F304B005D5421 /* Assets.xcassets */,
-				06AE1F2F218F304B005D5421 /* LaunchScreen.storyboard */,
-				06AE1F32218F304B005D5421 /* Info.plist */,
-				06698986218FC750005F7176 /* annotationpin.swift */,
-				0676C7D12190A41A0081519D /* photoCell.swift */,
+				068B1A762192998E00BD917A /* View */,
+				068B1A77219299A200BD917A /* Controller */,
 			);
 			path = PixelCity;
 			sourceTree = "<group>";
@@ -234,6 +253,7 @@
 				0676C7D22190A41A0081519D /* photoCell.swift in Sources */,
 				06698987218FC750005F7176 /* annotationpin.swift in Sources */,
 				06AE1F29218F3048005D5421 /* ViewController.swift in Sources */,
+				068B1A7A21929EB400BD917A /* PopVc.swift in Sources */,
 				06B4C9602190BD16001C1C21 /* constants.swift in Sources */,
 				06AE1F27218F3048005D5421 /* AppDelegate.swift in Sources */,
 			);
@@ -381,7 +401,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = PixelCity/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -399,7 +419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = PixelCity/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

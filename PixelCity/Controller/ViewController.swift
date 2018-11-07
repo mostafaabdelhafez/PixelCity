@@ -42,7 +42,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate{
         collectionView?.register(PhotoCell.self, forCellWithReuseIdentifier: "photocell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        collectionView?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        collectionView?.backgroundColor = #colorLiteral(red: 0.9771530032, green: 0.7062081099, blue: 0.1748393774, alpha: 1)
         dynamicview.addSubview(collectionView!)
         TouchTheMap()
 
@@ -146,7 +146,9 @@ extension ViewController:MKMapViewDelegate{
         removeThePin()
         removespinner()
         removeThePin()
-    
+    Arrayofphotos = []
+        Images = []
+        collectionView?.reloadData()
         PullUp()
         PullDown()
         Spinner()
@@ -166,7 +168,6 @@ extension ViewController:MKMapViewDelegate{
                         self.removespinner()
                         self.removeprogress()
                         
-                        print(self.Images)
                         self.collectionView?.reloadData()
                     }
                 })
@@ -180,16 +181,12 @@ extension ViewController:MKMapViewDelegate{
             Alamofire.request(url).responseImage(completionHandler: { (response) in
                 guard let image = response.result.value else { return }
                 self.Images.append(image)
-                self.progresslbl?.text = "\(self.Images.count)/40 Downloading"
+                self.progresslbl?.text = "\(self.Images.count)/\(self.Arrayofphotos.count) Downloading"
                 
                 if self.Images.count == self.Arrayofphotos.count {
                     Handler(true)
                 }
-            
-            
-            
-            
-            })
+                        })
             
         }
     }
@@ -210,19 +207,11 @@ extension ViewController:MKMapViewDelegate{
             for photo in photoDictArray{
                 
                 let PostUrl = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"
-               // let PostUrl = "http://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg)"
                 self.Arrayofphotos.append(PostUrl)
-                print(self.Arrayofphotos.count)
                 
             }
             Handler(true)
-            
-            
-            
-            
         }
-        
-        
     }
     
     func centermap(){
@@ -236,7 +225,6 @@ extension ViewController:MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         return MKOverlayRenderer()
     }
-    
 }
 
 extension ViewController:CLLocationManagerDelegate{
@@ -263,6 +251,12 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource{
         let imageView = UIImageView(image: imageFromIndex)
         cell.addSubview(imageView)
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let SelectedImage = Images[indexPath.row]
+        guard let PopStoryBoard = storyboard?.instantiateViewController(withIdentifier: "PopVc") as? PopVc else {return}
+        PopStoryBoard.FillPopVc(Image: SelectedImage)
+        present(PopStoryBoard, animated: true, completion: nil)
     }
 }
 

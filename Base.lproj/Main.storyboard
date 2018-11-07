@@ -85,7 +85,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="94" y="90"/>
+            <point key="canvasLocation" x="4" y="99"/>
+        </scene>
+        <!--Pop Vc-->
+        <scene sceneID="t2R-GZ-UZC">
+            <objects>
+                <viewController storyboardIdentifier="PopVc" id="xIF-Jb-EfT" customClass="PopVc" customModule="PixelCity" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dm1-CJ-FaA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sjt-qe-5D5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1N7-pe-ZC1">
+                                <rect key="frame" x="87.5" y="607" width="200" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double-Tap to dismiss" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRV-LL-4NL">
+                                        <rect key="frame" x="4" y="7" width="192" height="26"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBoldItalic" family="Avenir Next" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="B7k-UO-IgD"/>
+                                    <constraint firstItem="rRV-LL-4NL" firstAttribute="centerX" secondItem="1N7-pe-ZC1" secondAttribute="centerX" id="anm-MA-rfo"/>
+                                    <constraint firstAttribute="width" constant="200" id="hb6-qx-OWp"/>
+                                    <constraint firstItem="rRV-LL-4NL" firstAttribute="centerY" secondItem="1N7-pe-ZC1" secondAttribute="centerY" id="men-8O-YLA"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Sjt-qe-5D5" firstAttribute="top" secondItem="Dm1-CJ-FaA" secondAttribute="top" id="5IT-jK-qPA"/>
+                            <constraint firstItem="1N7-pe-ZC1" firstAttribute="centerX" secondItem="Dm1-CJ-FaA" secondAttribute="centerX" id="7be-9O-WYa"/>
+                            <constraint firstItem="Sjt-qe-5D5" firstAttribute="leading" secondItem="Dot-As-ttP" secondAttribute="leading" id="OTY-rS-mP3"/>
+                            <constraint firstItem="Sjt-qe-5D5" firstAttribute="bottom" secondItem="Dot-As-ttP" secondAttribute="bottom" id="V4h-7X-p7g"/>
+                            <constraint firstItem="Sjt-qe-5D5" firstAttribute="trailing" secondItem="Dot-As-ttP" secondAttribute="trailing" id="VFo-Xc-cZj"/>
+                            <constraint firstItem="Dot-As-ttP" firstAttribute="bottom" secondItem="1N7-pe-ZC1" secondAttribute="bottom" constant="20" id="wa9-AD-QOm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Dot-As-ttP"/>
+                    </view>
+                    <connections>
+                        <outlet property="ImageView" destination="Sjt-qe-5D5" id="W5n-Lt-etp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eYg-Rj-VIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="792.79999999999995" y="99.400299850074973"/>
         </scene>
     </scenes>
     <resources>
