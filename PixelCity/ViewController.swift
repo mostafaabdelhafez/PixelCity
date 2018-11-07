@@ -18,7 +18,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate{
     var screen = UIScreen.main.bounds.width
     var progresslbl:UILabel?
     var collectionView:UICollectionView?
-    var flowlayout=UICollectionViewLayout()
+    var flowlayout=UICollectionViewFlowLayout()
     var Arrayofphotos = [String]()
     var Images = [UIImage]()
     @IBOutlet weak var HeighCon: NSLayoutConstraint!
@@ -39,10 +39,10 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate{
         locationmanager.startUpdatingLocation()
         locationmanager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowlayout)
-        collectionView?.register(photoCell.self, forCellWithReuseIdentifier: "photocell")
+        collectionView?.register(PhotoCell.self, forCellWithReuseIdentifier: "photocell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        collectionView?.backgroundColor = #colorLiteral(red: 0.9771530032, green: 0.7062081099, blue: 0.1748393774, alpha: 1)
+        collectionView?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         dynamicview.addSubview(collectionView!)
         TouchTheMap()
 
@@ -102,7 +102,6 @@ extension ViewController:MKMapViewDelegate{
         }
     }
     @objc func ChangeHeightofView(){
-        
         if HeighCon.constant == 300 {
             HeighCon.constant = 0
             UIView.animate(withDuration: 0.3) {
@@ -126,6 +125,15 @@ extension ViewController:MKMapViewDelegate{
 
     mapview.addGestureRecognizer(Pin)
     }
+    
+    func CancelSessions(){
+        
+        
+        Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (DataSession, UploadData, DownloadData) in
+            DataSession.forEach({$0.cancel()})
+            DownloadData.forEach({$0.cancel()})
+        }
+    }
     func removeThePin(){
         for annotation in mapview.annotations{
             mapview.removeAnnotation(annotation)
@@ -137,11 +145,12 @@ extension ViewController:MKMapViewDelegate{
     @objc func DropPin(touchmap:UITapGestureRecognizer){
         removeThePin()
         removespinner()
-        addlabel()
         removeThePin()
+    
         PullUp()
         PullDown()
         Spinner()
+        addlabel()
         let toutchPoint = touchmap.location(in: mapview)
         let annotationCO = mapview.convert(toutchPoint, toCoordinateFrom: mapview)
         let annotation = DropAnnotation(coordinate: annotationCO, identifier: "reusableAnn")
@@ -156,6 +165,9 @@ extension ViewController:MKMapViewDelegate{
                         print("Load image")
                         self.removespinner()
                         self.removeprogress()
+                        
+                        print(self.Images)
+                        self.collectionView?.reloadData()
                     }
                 })
                 }
@@ -164,22 +176,20 @@ extension ViewController:MKMapViewDelegate{
         }
     func RetrieveImages(Handler:@escaping(_ status:Bool)->()){
         Images = []
-        for URL in Arrayofphotos{
-            
-            Alamofire.request(URL).responseImage { (image) in
-                guard let Image = image.result.value else {return}
-                self.Images.append(Image)
-                self.progresslbl?.text = "\(self.Images.count)/\(self.Arrayofphotos.count/2)"
+        for url in Arrayofphotos {
+            Alamofire.request(url).responseImage(completionHandler: { (response) in
+                guard let image = response.result.value else { return }
+                self.Images.append(image)
+                self.progresslbl?.text = "\(self.Images.count)/40 Downloading"
                 
-                if self.Images.count == (self.Arrayofphotos.count/2){
+                if self.Images.count == self.Arrayofphotos.count {
                     Handler(true)
                 }
-
             
             
             
             
-            }
+            })
             
         }
     }
@@ -242,12 +252,17 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return Images.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photocell", for: indexPath) as? photoCell
-        return cell!
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photocell", for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
+        let imageFromIndex = Images[indexPath.row]
+        let imageView = UIImageView(image: imageFromIndex)
+        cell.addSubview(imageView)
+        return cell
     }
 }
 

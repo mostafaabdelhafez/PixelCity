@@ -8,12 +8,14 @@
 
 import UIKit
 
-class photoCell: UICollectionViewCell {
+import UIKit
+
+class PhotoCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
+    
     required init?(coder aDecoder: NSCoder) {
-        fatalError("has not been implemented")
+        fatalError("init(coder:) has not been implement")
     }
-
 }
